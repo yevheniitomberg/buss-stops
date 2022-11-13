@@ -14,7 +14,7 @@
     <name>buss-stop-helper</name>
     <description>buss-stop-helper</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
