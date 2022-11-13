@@ -1,0 +1,41 @@
+<div th:fragment="header" class="header">
+    <h3>Buss Stops by Yevhenii Tomberg</h3>
+</div>
+
+
+<div th:fragment="stopSelect" class="form-group">
+    <label for="selectBox1">Select Buss Stop</label>
+    <select class="form-control selectBox" name="stopId" id="selectBox1">
+        <option
+                th:each="stop : ${stops}"
+                th:text="${stop.getStopName() + ' (' + stop.getStopId() + ')'}"
+                th:value="${stop.getStopId()}"
+                th:selected="${stop.getStopId() == idForSelectedStop}">
+        </option>
+    </select>
+</div>
+
+<div class="radios" th:fragment="radios" style="margin: 10px">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="search_mode" id="Radios1" value="userLocation" checked>
+        <label class="form-check-label" for="Radios1">
+            Search for your location
+        </label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="search_mode" id="Radios2" value="checkSchedule">
+        <label class="form-check-label" for="Radios2">
+            Just check a departure schedule
+        </label>
+    </div>
+</div>
+
+<div class="container time-container" th:fragment="currentTime">
+    <p class="alert alert-success" style="text-align: center;" th:text="${'Current time: ' + #calendars.format(#calendars.createNowForTimeZone('EET'), 'dd.MM.yyyy HH:mm')}"></p>
+</div>
+
+
+<div class="container time-container" th:fragment="routeNotFound">
+    <p class="alert alert-danger" style="text-align: center;" th:text="'Direct route for you request wasn\'t found'"></p>
+</div>
+
