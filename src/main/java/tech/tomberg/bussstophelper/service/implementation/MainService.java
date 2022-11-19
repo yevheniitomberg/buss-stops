@@ -81,7 +81,7 @@ public class MainService implements MainServiceInterface {
         for (String bussName : bussNames) {
             List<StopTime> stopTimes = new ArrayList<>();
             for (StopTime time : allStopTimes) {
-                if (time.getTrip().getRoute().getRouteShortName().equals(bussName)) {
+                if (time.getTrip().getRoute().getRouteShortName().equals(bussName) && time.getTrip().getService().isWorkingToday()) {
                     stopTimes.add(time);
                 }
             }
@@ -99,7 +99,7 @@ public class MainService implements MainServiceInterface {
         for (String bussName : bussNames) {
             List<StopTime> stopTimes = new ArrayList<>();
             for (StopTime time : allStopTimes) {
-                if (time.getTrip().getRoute().getRouteShortName().equals(bussName)) {
+                if (time.getTrip().getRoute().getRouteShortName().equals(bussName) && time.getTrip().getService().isWorkingToday()) {
                     stopTimes.add(time);
                 }
             }

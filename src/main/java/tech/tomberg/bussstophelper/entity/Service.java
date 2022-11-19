@@ -30,4 +30,16 @@ public class Service {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public boolean isWorkingToday() {
+        return switch (LocalDate.now().getDayOfWeek().getValue()) {
+            case 1 -> monday == 1;
+            case 2 -> tuesday == 1;
+            case 3 -> wednesday == 1;
+            case 4 -> thursday == 1;
+            case 5 -> friday == 1;
+            case 6 -> saturday == 1;
+            case 7 -> sunday == 1;
+            default -> false;
+        };
+    }
 }
