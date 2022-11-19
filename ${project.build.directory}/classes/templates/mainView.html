@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="imports :: imports">
+
+</head>
+<body onload="getLocation()">
+<div class="container">
+    <div th:replace="blocks :: header"></div>
+    <div class="widget-container">
+        <form class="form-container" th:action="@{/}" method="get">
+            <div class="form-group">
+                <label for="selectBox">Select Region</label>
+                <select class="form-control selectBox" name="region" id="selectBox">
+                    <option
+                            th:each="area : ${areas}"
+                            th:text="${area.getAreaName()}"
+                            th:value="${area.getId()}"
+                            th:selected="${area.getId() == idForSelectedArea}">
+                    </option>
+                </select>
+            </div>
+            <input type="submit" value="Confirm" class="btn btn-primary">
+        </form>
+        <form class="form-container" th:action="@{/}" method="get">
+            <div th:replace="blocks :: stopSelect"></div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+            <div th:replace="blocks :: radios"></div>
+        </form>
+
+        <div th:if="${user_area != null}" class="user-data-container">
+            <div class="child">
+                <div class="card-header" style="text-align: center">
+                    User location data
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" th:text="'Region/Area: ' + ${user_area.getAreaName()}"></li>
+                    <li class="list-group-item" th:text="'Closest Buss Stop: ' + ${user_stop.getStopName()} + ' (' + ${user_stop.getStopId() + ')'}"></li>
+                    <button class="btn btn-primary" onclick="refreshLocationData()">Refresh Location Data</button>
+                    <button class="btn btn-primary" onclick="clearData()">Clear fields</button>
+                </ul>
+            </div>
+        </div>
+
+        <div th:replace="blocks :: currentTime">
+
+        </div>
+    </div>
+
+    <div id="accordion" th:if="${foundCondition != null}">
+        <div class="container time-container" th:if="${foundCondition}">
+            <p class="alert alert-danger" style="text-align: center;" th:text="'Direct route for you request wasn\'t found'"></p>
+        </div>
+        <div th:if="${!foundCondition}">
+            <p class="bussSelector">
+                <a th:each="buss : ${bussNumbers}" th:text="${buss}" class="btn btn-success bussClass" data-toggle="collapse" th:href="'#buss' + ${buss}" role="button" aria-expanded="false" aria-controls="collapseExample"></a>
+            </p>
+            <div th:each="collection : ${allStopTimes}" data-parent="#accordion" th:id="'buss' + ${collection.get(0).getTrip().getRoute().getRouteShortName()}" class="collapse">
+                <div class="custom-collapse">
+                    <div style="flex: 0 1 100%; display: flex; flex-direction: column; flex-wrap: wrap; justify-content: center; margin-bottom: 10px">
+                        <div style="flex: 0 1 45%; text-align: center;">
+                            <h3><span class="badge badge-pill badge-info" th:text="'Selected: ' + ${collection.get(0).getTrip().getRoute().getRouteShortName()}"></span></h3>
+                        </div>
+                        <div style="flex: 0 1 45%; text-align: center;">
+                            <h3><span class="badge badge-pill badge-info" th:text="'Direction: ' + ${collection.get(0).getTrip().getTripHeadSign()}"></span></h3>
+                        </div>
+                    </div>
+
+                    <div style="flex: 0 1 100%; flex-wrap: wrap; justify-content: space-evenly; display: flex; margin-bottom: 10px" >
+                        <div th:each="stopName : ${routes.get(collection.get(0).getTrip().getRoute().getRouteShortName())}">
+                            <span th:text="${stopName.getStopName() + ' (' + stopName.getStopArea().getAreaName() + ')'}"
+                                  class="badge badge-secondary route-element"
+                                  th:classappend="${(stopName.getStopId() == idForSelectedStop ? 'selected-stop' : '') + (stopName.getStopId == user_stop.getStopId() ? 'user-stop' : '')}"
+                                  data-toggle="tooltip" data-placement="top" th:title="${stopName.getStopId() == idForSelectedStop} ? ${stopName.getStopId()} + ' --> Selected stop' : ${stopName.getStopId()}"
+                            >
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <div style="flex: 0 1 auto"
+                         th:each="stopTime : ${collection}"
+                         th:text="${stopTime.getDepartureTime().toString()}"
+                         class="card card-body"
+                         th:classappend="${stopTime.isClose()} ? 'nextBuss' : ''"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="imports :: bottomImport" defer></script>
+</body>
+</html>

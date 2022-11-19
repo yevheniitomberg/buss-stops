@@ -1,0 +1,170 @@
+.custom-map-control-button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    height: 40px;
+    cursor: pointer;
+}
+.custom-map-control-button:hover {
+    background: rgb(235, 235, 235);
+}
+#map {
+    height: 500px;
+    border-radius: 10px;
+    width: 100%;
+}
+.map-container {
+    height: 600px;
+    padding: 20px 50px;
+}
+.ui-widget {
+    margin: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    flex: 0 1 100%;
+    flex-wrap: wrap;
+}
+.widget-container {
+    display: flex;
+    flex: 0 1 auto;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.header {
+    padding: 10px;
+    text-align: center;
+}
+.form-container {
+    flex: 0 1 40%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.bg-light {
+    background: #eef0f4;
+}
+
+/*.card {
+    transform: translateY(-50%);
+}*/
+
+.choices[data-type*=select-one]:after {
+    right: 1.5rem;
+}
+
+.shadow {
+    box-shadow: 0.3rem 0.3rem 1rem rgba(178, 200, 244, 0.23);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+}
+.bg-light {
+    background: #eef0f4;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+    padding-right: 1rem;
+}
+
+.choices__list--single {
+    padding: 0;
+}
+
+.bussSelector {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+.custom-collapse {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.time-container {
+    flex: 0 1 89.6%;
+    margin-top: 10px;
+}
+
+.nextBuss {
+    background-color: #78fd49;
+}
+.bussClass {
+    margin: 3px 3px;
+}
+.user-data-container {
+    flex: 0 1 100%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+}
+.child {
+    flex: 0 1 40%;
+    display: flex;
+    flex-direction: column;
+    min-width: 381px;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+
+}
+
+@media screen and (max-width: 900px) {
+    .form-container {
+        flex: 0 1 89.6%;
+        margin-top: 10px;
+    }
+}
+
+body {
+    padding: 20px;
+}
+
+.route-element {
+    flex: 0 1 auto;
+    margin: 5px;
+}
+.selected-stop {
+    background-color: #78fd49;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+.user-stop {
+    background-color: #e7a904;
+}
